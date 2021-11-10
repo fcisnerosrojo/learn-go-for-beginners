@@ -17,15 +17,53 @@
 
         <p id="player_choice">&nbsp;</p>
         <p id="computer_choice">&nbsp;</p>
-        <p id="round_result">&nbsp;</p>
+        <p class="fw-lighter" id="round_result">&nbsp;</p>
+        <p class="fw-bolder" id="message">&nbsp;</p>
 
         <hr>
         <p>Choose!</p>
 
-        <button class="btn btn-primary">Rock</button>
-        <button class="btn btn-primary">Paper</button>
-        <button class="btn btn-primary">Scissors</button>
+        <button class="btn btn-primary" onclick="choose(0)">Rock</button>
+        <button class="btn btn-primary" onclick="choose(1)">Paper</button>
+        <button class="btn btn-primary" onclick="choose(2)">Scissors</button>
     </div>
 </body>
+<script>
+    const choose = (x) => {
+        fetch("/play?x=" + x)
+            .then(response => response.json())
+            .then(({ message, computer_choice, round_result }) => {
+                displayComputerChoice(computer_choice);
+                displayPlayerChoice(x);
+                displayResult(round_result);
+                displayMessage(message);
+            });
+    }
+
+    const displayComputerChoice = (computer_choice) => {
+        document.getElementById("computer_choice").innerHTML = computer_choice;
+    }
+
+    const displayPlayerChoice = (x) => {
+        let btnClicked;
+        if (x === 0) {
+            btnClicked = 'ROCK'
+        } else if (x === 1) {
+            btnClicked = 'PAPER'
+        } else if (x === 2) {
+            btnClicked = 'SCISSORS'
+        }
+
+        document.getElementById("player_choice").innerHTML = `You clicked ${btnClicked}!`;
+    }
+
+    const displayResult = (round_result) => {
+        document.getElementById("round_result").innerHTML = round_result;
+    }
+
+    const displayMessage = (message) => {
+        document.getElementById("message").innerHTML = message;
+    }
+</script>
 
 </html>
