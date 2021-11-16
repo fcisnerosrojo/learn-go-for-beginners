@@ -24,6 +24,6 @@ Good luck!
 
 To start playing, clone the repository and run "go run main.go" inside "source" folder.
 The app runs on 8080 port, so click on http://localhost:8080/ to see the game.
-No dependencies needed.
+No dependencies needed after Go installation https://golang.org/doc/install.
 
 Have fun!
